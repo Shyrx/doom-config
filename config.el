@@ -75,12 +75,13 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(set-file-templates!
- "\\.js$"       :trigger "__js"
- "\\.c$"        :trigger "__c"
- "\\.h$"        :trigger "__h"
- "/main\\.c$"   :trigger "__main.c"
- )
+(setq +file-templates-dir "~/.doom.d/templates" max-specpdl-size 1000)
+
+(set-file-template!     "\\.js$"       :trigger "__js")
+(set-file-template!     "/main\\.c$"   :trigger "__main.c")
+(set-file-template!     "(?!/main)\\.c$"        :trigger "__c")
+(set-file-template!     "\\.h$"        :trigger "__h")
+
 
 ;; clang format if file is in c-mode
 (defun my-clang-format ()
