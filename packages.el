@@ -50,3 +50,4 @@
 ;(unpin! t)
 
 (package! arduino-mode)
+(package! clang-format)

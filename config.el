@@ -81,3 +81,13 @@
  "\\.h$"        :trigger "__h"
  "/main\\.c$"   :trigger "__main.c"
  )
+
+;; clang format if file is in c-mode
+(defun my-clang-format ()
+  "Run clang-format-buffer if current major mode is c-mode"
+ (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+    (clang-format-buffer())))
+
+(add-hook 'before-save-hook 'my-clang-format)
+
+(setq-default fill-column 80)
