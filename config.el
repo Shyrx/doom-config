@@ -77,11 +77,11 @@
 
 (setq +file-templates-dir "~/.doom.d/templates" max-specpdl-size 1000)
 
-(set-file-template!     "\\.js$"       :trigger "__js")
-(set-file-template!     "/main\\.c$"   :trigger "__main.c")
+(set-file-template!     "\\.js$"                :trigger "__js")
+(set-file-template!     "/main\\.c$"            :trigger "__main.c")
 (set-file-template!     "(?!/main)\\.c$"        :trigger "__c")
-(set-file-template!     "\\.h$"        :trigger "__h")
-
+(set-file-template!     "\\.h$"                 :trigger "__h")
+(set-file-template!     "/shell\\.nix$"         :trigger "__shell.nix")
 
 ;; clang format if file is in c-mode
 (defun my-clang-format ()
