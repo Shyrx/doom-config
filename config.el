@@ -125,3 +125,5 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
 
 (map! :leader
       :desc "Toggle doom scratch buffer" "x" #'doom/toggle-scratch-buffer)
+
+(add-hook! 'pdf-view-mode-hook #'pdf-view-themed-minor-mode)
