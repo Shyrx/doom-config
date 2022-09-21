@@ -92,3 +92,36 @@
 (add-hook 'before-save-hook 'my-clang-format)
 
 (setq-default fill-column 80)
+
+
+(defun doom/toggle-scratch-buffer (&optional arg project-p same-window-p)
+  "Toggle a persistent scratch buffer.
+
+If passed the prefix ARG, do not restore the last scratch buffer.
+If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
+  current project."
+  (interactive "P")
+  (let (projectile-enable-caching)
+    (if (eq (+popup-buffer-p (get-buffer "*doom:scratch*")) nil)
+        (funcall
+     (if same-window-p
+         #'switch-to-buffer
+       #'pop-to-buffer)
+     (doom-scratch-buffer
+      arg
+      (cond ((eq doom-scratch-initial-major-mode t)
+             (unless (or buffer-read-only
+                         (derived-mode-p 'special-mode)
+                         (string-match-p "^ ?\\*" (buffer-name)))
+               major-mode))
+            ((null doom-scratch-initial-major-mode)
+             nil)
+            ((symbolp doom-scratch-initial-major-mode)
+             doom-scratch-initial-major-mode))
+      default-directory
+      (when project-p
+        (doom-project-name))))
+      (quit-windows-on (get-buffer "*doom:scratch*") nil))))
+
+(map! :leader
+      :desc "Toggle doom scratch buffer" "x" #'doom/toggle-scratch-buffer)
