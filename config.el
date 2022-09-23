@@ -83,12 +83,6 @@
 (set-file-template!     "\\.h$"                 :trigger "__h")
 (set-file-template!     "/shell\\.nix$"         :trigger "__shell.nix")
 
-;; clang format if file is in c-mode
-(defun my-clang-format ()
-  "Run clang-format-buffer if current major mode is c-mode"
- (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
-    (clang-format-buffer())))
-
 (add-hook 'before-save-hook 'my-clang-format)
 
 (setq-default fill-column 80)
@@ -125,5 +119,6 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
 
 (map! :leader
       :desc "Toggle doom scratch buffer" "x" #'doom/toggle-scratch-buffer)
+
 
 (add-hook! 'pdf-view-mode-hook #'pdf-view-themed-minor-mode)
