@@ -50,3 +50,4 @@
 ;(unpin! t)
 
 (package! clang-format)
+(package! meson-mode)
