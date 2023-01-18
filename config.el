@@ -117,3 +117,8 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
 
 (map! :leader
       :desc "Toggle doom scratch buffer" "x" #'doom/toggle-scratch-buffer)
+
+(map! :after projectile
+      :leader
+      :prefix "s"
+      :desc "Replace in project" "R" 'projectile-replace-regexp)
