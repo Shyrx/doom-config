@@ -6,8 +6,7 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-(setq user-full-name "Antoine Solé"
-      user-mail-address "antoine.sole@epita.fr")
+(setq user-full-name "Antoine Sole")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -74,14 +73,6 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-
-(setq +file-templates-dir "~/.doom.d/templates" max-specpdl-size 1000)
-
-(set-file-template!     "\\.js$"                :trigger "__js")
-(set-file-template!     "/main\\.c$"            :trigger "__main.c")
-(set-file-template!     "(?!/main)\\.c$"        :trigger "__c")
-(set-file-template!     "\\.h$"                 :trigger "__h")
-(set-file-template!     "/shell\\.nix$"         :trigger "__shell.nix")
 
 (setq-default fill-column 80)
 
