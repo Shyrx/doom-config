@@ -113,3 +113,29 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
       :leader
       :prefix "s"
       :desc "Replace in project" "R" 'projectile-replace-regexp)
+
+
+(defun org/insert-heading-reference (heading description)
+  "Insert an reference to a heading"
+
+  (interactive "sHeading: \nsDescription: " )
+  (insert
+   (concat " [["
+           heading
+           "]"
+           (if (string= "" description)
+               ()
+               (concat "[" description "]"))
+           "]")))
+
+(map! :after org
+      :localleader
+      (:prefix-map ("m" . "move")
+       :desc "Move to parent heading" "u" 'outline-up-heading
+       :desc "Move to next heading at same level" "j" 'org-forward-heading-same-level
+       :desc "Move to prev heading at same level" "k" 'org-backward-heading-same-level))
+
+(map! :after org
+      :localleader
+      (:prefix-map ("l" . "links")
+       :desc "Insert an reference to a heading" "h" 'org/insert-heading-reference))
