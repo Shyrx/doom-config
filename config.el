@@ -31,7 +31,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-bluloco-dark)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -74,9 +74,19 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;;======================================;;
+;; BASICS ;;
+;;======================================;;
+
 (setq-default fill-column 80)
+(setq-default text-scale-mode-amount 3)
 
 
+;;======================================;;
+;; DEFUN ;;
+;;======================================;;
+
+;; Persistent scrach buffer
 (defun doom/toggle-scratch-buffer (&optional arg project-p same-window-p)
   "Toggle a persistent scratch buffer.
 
@@ -106,14 +116,37 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
         (doom-project-name))))
       (quit-windows-on (get-buffer "*doom:scratch*") nil))))
 
+;; Connect to ssh quickly
+(defun ssh-connect ()
+  (interactive))
+
+;;======================================;;
+;; MAPPING ;;
+;;======================================;;
+
 (map! :leader
-      :desc "Toggle doom scratch buffer" "x" #'doom/toggle-scratch-buffer)
+      :desc "Open scratch pad" "x" #'doom/toggle-scratch-buffer)
 
 (map! :after projectile
       :leader
       :prefix "s"
       :desc "Replace in project" "R" 'projectile-replace-regexp)
 
+(map! :leader
+      :prefix "o"
+      :desc "Open ssh connection" "s" 'ssh-connect)
+
+
+;;======================================;;
+;; ORG ;;
+;;======================================;;
+
+;; Keep a daily note
+(defun open-daily-note ()
+  (interactive)
+  (let* ((today (format-time-string "%Y-%m-%d"))
+         (path (concat (getenv "HOME") "/org/daily/" today ".org")))
+    (find-file path)))
 
 (defun org/insert-heading-reference (heading description)
   "Insert an reference to a heading"
@@ -139,3 +172,7 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
       :localleader
       (:prefix-map ("l" . "links")
        :desc "Insert an reference to a heading" "h" 'org/insert-heading-reference))
+
+(map! :leader
+      :prefix "n"
+      :desc "Open daily note" "d" 'open-daily-note)
