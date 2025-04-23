@@ -136,6 +136,10 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
       :prefix "o"
       :desc "Open ssh connection" "s" 'ssh-connect)
 
+(map! :mode html-mode
+      :leader
+      :prefix "c"
+      :desc "Format file" "F" 'sgml-pretty-print)
 
 ;;======================================;;
 ;; ORG ;;
