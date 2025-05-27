@@ -120,6 +120,10 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
 (defun ssh-connect ()
   (interactive))
 
+(defun indent-file ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
 ;;======================================;;
 ;; MAPPING ;;
 ;;======================================;;
@@ -140,6 +144,11 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
       :leader
       :prefix "c"
       :desc "Format file" "F" 'sgml-pretty-print)
+
+(map! :leader
+      :prefix "c"
+      :desc "Indent file" "I" 'indent-file)
+
 
 ;;======================================;;
 ;; ORG ;;
