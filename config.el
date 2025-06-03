@@ -117,8 +117,9 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
       (quit-windows-on (get-buffer "*doom:scratch*") nil))))
 
 ;; Connect to ssh quickly
-(defun ssh-connect ()
-  (interactive))
+(defun ssh-connect (user ip &optional path)
+  (interactive "sUser: \nsIP: \nsPath: ")
+  (find-file (concat "/ssh:" user "@" ip ":/" path)))
 
 (defun indent-file ()
   (interactive)
@@ -138,7 +139,9 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
 
 (map! :leader
       :prefix "o"
-      :desc "Open ssh connection" "s" 'ssh-connect)
+      (:prefix-map ("s" . "SSH connections")
+        :desc "Connect with ssh" "s" 'ssh-connect
+        ))
 
 (map! :mode html-mode
       :leader
