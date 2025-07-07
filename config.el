@@ -192,3 +192,8 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
 (map! :leader
       :prefix "n"
       :desc "Open daily note" "d" 'open-daily-note)
+
+(map! :mode which-key-mode
+      :desc "Next page cycling" "M-l" 'which-key-show-next-page-cycle
+      :desc "Previous page cycling" "M-h" 'which-key-show-previous-page-cycle)
+
