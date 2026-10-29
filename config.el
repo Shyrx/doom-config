@@ -80,6 +80,8 @@
 
 (setq-default fill-column 80)
 (setq-default text-scale-mode-amount 3)
+;; Remove title bar
+(add-to-list 'default-frame-alist '(undecorated . t))
 
 
 ;;======================================;;
