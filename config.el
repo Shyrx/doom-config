@@ -97,23 +97,23 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
   (let (projectile-enable-caching)
     (if (eq (+popup-buffer-p (get-buffer "*doom:scratch*")) nil)
         (funcall
-     (if same-window-p
-         #'switch-to-buffer
-       #'pop-to-buffer)
-     (doom-scratch-buffer
-      arg
-      (cond ((eq doom-scratch-initial-major-mode t)
-             (unless (or buffer-read-only
-                         (derived-mode-p 'special-mode)
-                         (string-match-p "^ ?\\*" (buffer-name)))
-               major-mode))
-            ((null doom-scratch-initial-major-mode)
-             nil)
-            ((symbolp doom-scratch-initial-major-mode)
-             doom-scratch-initial-major-mode))
-      default-directory
-      (when project-p
-        (doom-project-name))))
+         (if same-window-p
+             #'switch-to-buffer
+           #'pop-to-buffer)
+         (doom-scratch-buffer
+          arg
+          (cond ((eq doom-scratch-initial-major-mode t)
+                 (unless (or buffer-read-only
+                             (derived-mode-p 'special-mode)
+                             (string-match-p "^ ?\\*" (buffer-name)))
+                   major-mode))
+                ((null doom-scratch-initial-major-mode)
+                 nil)
+                ((symbolp doom-scratch-initial-major-mode)
+                 doom-scratch-initial-major-mode))
+          default-directory
+          (when project-p
+            (doom-project-name))))
       (quit-windows-on (get-buffer "*doom:scratch*") nil))))
 
 ;; Connect to ssh quickly
@@ -140,8 +140,8 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
 (map! :leader
       :prefix "o"
       (:prefix-map ("s" . "SSH connections")
-        :desc "Connect with ssh" "s" 'ssh-connect
-        ))
+       :desc "Connect with ssh" "s" 'ssh-connect
+       ))
 
 (map! :mode html-mode
       :leader
@@ -174,7 +174,7 @@ If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
            "]"
            (if (string= "" description)
                ()
-               (concat "[" description "]"))
+             (concat "[" description "]"))
            "]")))
 
 (map! :after org
